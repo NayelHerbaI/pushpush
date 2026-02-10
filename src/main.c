@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:01:01 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 16:13:37 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/10 18:09:43 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,62 @@ void	ft_puterror(char *message, t_data *data)
 	free_all(data, -1);
 }
 
-void	print_list(t_data *data)
+void	print_stacks(t_data *data)
 {
-	t_node	*lst;
+	t_node	*tmp;
 
-	lst = data->a;
-	while (lst)
+	ft_putstr("---- STACK A ----\n");
+	tmp = data->a;
+	while (tmp)
 	{
-		printf("nb = %d | index = %d\n", lst->nb, lst->index);
-		lst = lst->next;
+		ft_putstr("nb = ");
+		ft_putnbr(tmp->nb);
+		ft_putstr(" | index = ");
+		ft_putnbr(tmp->index);
+		ft_putstr("\n");
+		tmp = tmp->next;
 	}
+
+	ft_putstr("---- STACK B ----\n");
+	tmp = data->b;
+	while (tmp)
+	{
+		ft_putstr("nb = ");
+		ft_putnbr(tmp->nb);
+		ft_putstr(" | index = ");
+		ft_putnbr(tmp->index);
+		ft_putstr("\n");
+		tmp = tmp->next;
+	}
+	ft_putstr("-----------------\n");
+}
+
+void	pick_sort(t_data *data)
+{
+	if (data->nb_args == 2)
+		sa(data);
+	else if (data->nb_args == 3)
+		sort_three(data);
+	else if (data->nb_args == 4)
+		sort_four(data);
+	else if (data->nb_args == 5)
+		sort_five(data);
+	else
+		bitwise_alg(data);
+}
+
+int	is_list_not_sorted(t_data *data)
+{
+	t_node	*head;
+
+	head = data->a;
+	while (head->next != NULL)
+	{
+		if (head->index > head->next->index)
+			return (1);
+		head = head->next;
+	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -62,11 +108,18 @@ int	main(int ac, char **av)
 
 	data = malloc(sizeof(t_data));
 	if (!data)
-		exit (-1);
+		exit(-1);
 	if (ac < 2 || error_check(ac, av) != 0)
-		ft_putstr("Error\n");
-	init_data(ac, av, data);
-	print_list(data);
+		return (ft_putstr("Error\n"));
+	if (ac == 2)
+		create_data_from_string(av[1], data);
+	else
+		init_data(ac, &av[1], data);
+	while (is_list_not_sorted(data) == 1)
+	{
+		pick_sort(data);
+	}
+	print_stacks(data);
 	free_all(data, 1);
 	return (0);
 }

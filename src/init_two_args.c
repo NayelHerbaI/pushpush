@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   init_two_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 13:08:53 by hnayel            #+#    #+#             */
-/*   Updated: 2026/02/10 18:08:46 by jihi             ###   ########.fr       */
+/*   Created: 2026/02/10 17:31:34 by jihi              #+#    #+#             */
+/*   Updated: 2026/02/10 18:00:51 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int	ft_putstr(char *str)
+void	free_split(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-		ft_putchar(str[i++]);
-	return (i);
-}
-
-void	ft_putnbr(int nb)
-{
-	if (nb < 0)
+	if (!tab)
+		return ;
+	while (tab[i])
 	{
-		nb *= -1;
-		ft_putchar('-');
+		free(tab[i]);
+		i++;
 	}
-	if (nb > 9)
-		ft_putnbr(nb / 10);
-	ft_putchar(nb % 10 + 48);
+	free(tab);
+}
+void	create_data_from_string(char *str, t_data *data)
+{
+	char	**tab;
+	int		i;
+
+	tab = ft_split(str, ' ');
+	if (!tab || !tab[0])
+	{
+		free_split(tab);
+		free_all(data, -1);
+	}
+	i = 0;
+	while (tab[i])
+		i++;
+	init_data(i + 1, tab, data);
+	data->nb_args = i;
+	free_split(tab);
 }

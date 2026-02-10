@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:07:18 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 16:13:32 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/10 17:56:58 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_node	*create_list(int ac, char **av)
 	t_node	*new;
 
 	list = NULL;
-	i = 1;
-	while (i < ac)
+	i = 0;
+	while (i < ac - 1)
 	{
 		new = add_new(ft_atoi(av[i]));
 		if (!new)
@@ -55,7 +55,7 @@ void	assign_index(t_node *list)
 
 void	init_data(int ac, char **av, t_data *data)
 {
-	data->nb_args = ac;
+	data->nb_args = ac - 1;
 	data->a = create_list(ac, av);
 	if (!data->a)
 		free_all(data, -1);

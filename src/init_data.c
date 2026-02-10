@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:07:18 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 16:10:09 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/10 16:13:32 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	assign_index(t_node *list)
 		curr->index = index;
 		curr = curr->next;
 	}
-	
 }
 
 void	init_data(int ac, char **av, t_data *data)

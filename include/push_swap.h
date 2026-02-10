@@ -6,12 +6,12 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:01:35 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 15:57:29 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/10 16:14:18 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <stddef.h>
 # include <stdio.h>
@@ -23,14 +23,14 @@ typedef struct s_node
 	int				nb;
 	int				index;
 	struct s_node	*next;
-}t_node;
+}	t_node;
 
 typedef struct s_data
 {
 	t_node	*a;
 	t_node	*b;
 	int		nb_args;
-}t_data;
+}	t_data;
 
 void			init_data(int ac, char **av, t_data *data);
 void			free_all(t_data *data, int exit_value);

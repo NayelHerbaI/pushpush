@@ -6,7 +6,7 @@
 #    By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/10 15:03:59 by jihi              #+#    #+#              #
-#    Updated: 2026/02/10 15:25:27 by jihi             ###   ########.fr        #
+#    Updated: 2026/02/10 15:50:00 by jihi             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,10 @@ NAME	=	push_swap
 SRC		=	src/main.c						\
 			src/ft_split.c					\
 			src/ft_atoi.c					\
-			src/utils.c					\
+			src/utils.c						\
 			src/init_data.c					\
+			src/error_check.c				\
+			src/node_handling.c				\
 
 OBJ_DIR	=	obj
 OBJ		=	$(SRC:src/%.c=$(OBJ_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 16:59:51 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/12 20:54:34 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 22:32:00 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,4 @@ void	sort_five(t_data *data)
 	sort_three(data);
 	pa(data);
 	pa(data);
-}
-
-void	bitwise_alg(t_data *data)
-{
-	(void)data;
 }

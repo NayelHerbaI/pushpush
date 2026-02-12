@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:01:01 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/12 20:53:16 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 22:37:07 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	pick_sort(t_data *data)
 	else if (data->nb_args == 5)
 		sort_five(data);
 	else
-		bitwise_alg(data);
+		radix(data);
 }
 
 int	is_list_not_sorted(t_data *data)

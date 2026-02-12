@@ -6,7 +6,7 @@
 #    By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/10 15:03:59 by jihi              #+#    #+#              #
-#    Updated: 2026/02/12 15:00:57 by jihi             ###   ########.fr        #
+#    Updated: 2026/02/12 22:37:37 by jihi             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC		=	src/main.c						\
 			src/sort.c						\
 			src/init_two_args.c				\
 			src/sorting_utils.c				\
+			src/radix.c						\
 
 OBJ_DIR	=	obj
 OBJ		=	$(SRC:src/%.c=$(OBJ_DIR)/%.o)

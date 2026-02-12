@@ -6,89 +6,96 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:00:41 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 17:31:17 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 20:49:08 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	find_tab_size(char *s, char c)
+static int	count_words(char *s, char c)
 {
-	int	i;
-	int	count;
+	int	n;
 
-	i = 0;
-	count = 0;
-	while (s[i])
+	n = 0;
+	while (*s)
 	{
-		if (s[i + 1] && s[i] == c && s[i + 1] != c)
-			count++;
-		if (s[i] != c && i == 0)
-			count++;
-		i++;
+		while (*s == c)
+			s++;
+		if (*s)
+			n++;
+		while (*s && *s != c)
+			s++;
 	}
-	return (count);
+	return (n);
 }
 
-char	*ft_copy(char *s, char c)
+static int	word_len(char *s, char c)
 {
-	int		i;
-	char	*cpy;
+	int	len;
+
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	return (len);
+}
+
+static char	**free_split_partial(char **tab, int filled)
+{
+	int	i;
 
 	i = 0;
-	while (*s && *s == c)
-		s++;
-	while (s[i] && s[i] != c)
+	while (i < filled)
+	{
+		free(tab[i]);
 		i++;
-	cpy = malloc(sizeof(char) * i + 1);
-	if (cpy == NULL)
+	}
+	free(tab);
+	return (NULL);
+}
+
+static char	*dup_word(char *s, int len)
+{
+	char	*word;
+	int		i;
+
+	word = (char *)malloc(len + 1);
+	if (!word)
 		return (NULL);
 	i = 0;
-	while (s[i] && s[i] != c)
+	while (i < len)
 	{
-		cpy[i] = s[i];
+		word[i] = s[i];
 		i++;
 	}
-	cpy[i] = '\0';
-	return (cpy);
-}
-
-char	**second_split(char *s, char c, char **tab)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (s[++i])
-	{
-		if ((s[i] == c && s[i + 1] != c && s[i + 1])
-			|| (i == 0 && s[i] != c))
-		{
-			tab[j] = ft_copy(&s[i + 1 - (i == 0)], c);
-			if (tab[j] == NULL)
-				return (NULL);
-			j++;
-		}
-	}
-	tab[j] = NULL;
-	return (tab);
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char *s, char c)
 {
-	int		tab_size;
 	char	**tab;
+	int		i;
+	int		len;
 
-	if ((!s && !c) || (s[0] == '\0' && c == 'z'))
-	{
-		tab = (char **)malloc(sizeof(char *));
-		tab[0] = 0;
-		return (tab);
-	}
-	tab_size = find_tab_size(s, c);
-	tab = malloc(sizeof(char *) * (tab_size + 1));
-	if (tab == NULL)
+	if (!s)
 		return (NULL);
-	return (second_split(s, c, tab));
+	tab = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (!*s)
+			break ;
+		len = word_len(s, c);
+		tab[i] = dup_word(s, len);
+		if (!tab[i])
+			return (free_split_partial(tab, i));
+		i++;
+		s += len;
+	}
+	tab[i] = NULL;
+	return (tab);
 }

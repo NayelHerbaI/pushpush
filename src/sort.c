@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 16:59:51 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/12 17:02:16 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 20:54:34 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	sort_three(t_data *data)
 		rra(data);
 	}
 }
+
 void	sort_four(t_data *data)
 {
 	int	pos_min;

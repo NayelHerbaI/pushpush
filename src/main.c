@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:01:01 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/12 17:26:47 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 20:53:16 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,19 @@ void	free_all(t_data *data, int exit_value)
 {
 	t_node	*tmp;
 
-	if (data->a)
+	if (!data)
+		exit(exit_value);
+	while (data->a)
 	{
-		while (data->a != NULL)
-		{
-			tmp = data->a;
-			data->a = data->a->next;
-			free(tmp);
-		}
+		tmp = data->a;
+		data->a = data->a->next;
+		free(tmp);
 	}
-	if (data->b)
+	while (data->b)
 	{
-		while (data->b != NULL)
-		{
-			tmp = data->b;
-			data->b = data->b->next;
-			free(tmp);
-		}
+		tmp = data->b;
+		data->b = data->b->next;
+		free(tmp);
 	}
 	free(data);
 	exit(exit_value);
@@ -59,7 +55,6 @@ void	print_stacks(t_data *data)
 		ft_putstr("\n");
 		tmp = tmp->next;
 	}
-
 	ft_putstr("---- STACK B ----\n");
 	tmp = data->b;
 	while (tmp)
@@ -109,23 +104,23 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		exit(-1);
+	data->a = NULL;
+	data->b = NULL;
+	data->nb_args = 0;
 	if (ac == 1)
 	{
 		free(data);
 		return (-1);
 	}
 	if (ac == 2)
-	{
-		if (create_data_from_string(av[1], data) == -1)
-			return (-1);
-	}
+		create_data_from_string(av[1], data);
 	else
 	{
 		if (error_check(ac, av, 1) != 0)
 		{
 			free(data);
-			write(2, "Error\n", 6);		
-			return (-1);		
+			write(2, "Error\n", 6);
+			return (-1);
 		}
 		init_data(ac, &av[1], data);
 	}

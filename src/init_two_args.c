@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 17:31:34 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/12 17:22:20 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 20:53:33 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,19 @@ void	free_split(char **tab)
 	}
 	free(tab);
 }
-int	create_data_from_string(char *str, t_data *data)
+
+void	create_data_from_string(char *str, t_data *data)
 {
 	char	**tab;
 	int		i;
 
 	tab = ft_split(str, ' ');
-	if (!tab || !tab[0])
+	if (!tab)
+	{
+		write(2, "Error\n", 6);
+		free_all(data, -1);
+	}
+	if (!tab[0])
 	{
 		free_split(tab);
 		write(2, "Error\n", 6);
@@ -50,5 +56,4 @@ int	create_data_from_string(char *str, t_data *data)
 	init_data(i + 1, tab, data);
 	data->nb_args = i;
 	free_split(tab);
-	return (0);
 }

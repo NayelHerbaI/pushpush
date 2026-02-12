@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:01:35 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 17:45:50 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 16:53:14 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			add_back(t_node **list, t_node *new);
 t_node			*add_new(int nb);
 long long int	ft_atoi(char *str);
 void			ft_putnbr(int nb);
-int				error_check(int ac, char **av);
+int				error_check(int ac, char **av, int start);
 void			sa(t_data *data);
 void			pa(t_data *data);
 void			pb(t_data *data);
@@ -50,6 +50,8 @@ void			sort_three(t_data *data);
 void			sort_four(t_data *data);
 void			sort_five(t_data *data);
 void			bitwise_alg(t_data *data);
-void			create_data_from_string(char *str, t_data *data);
+int				create_data_from_string(char *str, t_data *data);
+void			put_pos_to_top(t_data *data, int pos);
+int				get_pos_index(t_node *node, int index);
 
 #endif

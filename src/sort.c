@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 16:59:51 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 18:09:35 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 17:02:16 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,31 @@ void	sort_three(t_data *data)
 }
 void	sort_four(t_data *data)
 {
-	(void)data;	
-	
+	int	pos_min;
+
+	pos_min = get_pos_index(data->a, 0);
+	put_pos_to_top(data, pos_min);
+	pb(data);
+	sort_three(data);
+	pa(data);
 }
 
 void	sort_five(t_data *data)
 {
-	(void)data;	
-	
+	int	pos;
+
+	pos = get_pos_index(data->a, 0);
+	put_pos_to_top(data, pos);
+	pb(data);
+	pos = get_pos_index(data->a, 1);
+	put_pos_to_top(data, pos);
+	pb(data);
+	sort_three(data);
+	pa(data);
+	pa(data);
 }
 
 void	bitwise_alg(t_data *data)
 {
-	(void)data;	
-	
+	(void)data;
 }

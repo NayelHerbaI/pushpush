@@ -6,7 +6,7 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 15:01:01 by jihi              #+#    #+#             */
-/*   Updated: 2026/02/10 18:09:43 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 17:26:47 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,30 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		exit(-1);
-	if (ac < 2 || error_check(ac, av) != 0)
-		return (ft_putstr("Error\n"));
+	if (ac == 1)
+	{
+		free(data);
+		return (-1);
+	}
 	if (ac == 2)
-		create_data_from_string(av[1], data);
+	{
+		if (create_data_from_string(av[1], data) == -1)
+			return (-1);
+	}
 	else
+	{
+		if (error_check(ac, av, 1) != 0)
+		{
+			free(data);
+			write(2, "Error\n", 6);		
+			return (-1);		
+		}
 		init_data(ac, &av[1], data);
+	}
 	while (is_list_not_sorted(data) == 1)
 	{
 		pick_sort(data);
 	}
-	print_stacks(data);
 	free_all(data, 1);
 	return (0);
 }

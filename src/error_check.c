@@ -6,18 +6,18 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 13:07:15 by hnayel            #+#    #+#             */
-/*   Updated: 2026/02/10 15:57:08 by jihi             ###   ########.fr       */
+/*   Updated: 2026/02/12 17:37:06 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	check_dup(char **av)
+int	check_dup(char **av, int start)
 {
 	int	i;
 	int	j;
 
-	i = 1;
+	i = start;
 	while (av[i + 1])
 	{
 		j = 1;
@@ -48,20 +48,22 @@ int	check_string_arg(char *str)
 	return (0);
 }
 
-int	number_check(int ac, char **av)
+int	number_check(int ac, char **av, int start)
 {
 	int	i;
 	int	j;
 
-	i = 1;
+	i = start;
 	while (i < ac)
 	{
 		j = 0;
+		if (av[i][j] == '-')
+			j++;
+		if (av[i][j] == '\0')
+			return (1);
 		while (av[i][j])
 		{
-			if (j == 0 && av[i][j] == '-')
-				j++;
-			if (!(av[i][j] <= '9' && av[i][j] >= '0'))
+			if (av[i][j] < '0' || av[i][j] > '9')
 				return (1);
 			j++;
 		}
@@ -70,11 +72,11 @@ int	number_check(int ac, char **av)
 	return (0);
 }
 
-int	check_int_min_max(int ac, char **av)
+int	check_int_min_max(int ac, char **av, int start)
 {
 	int	i;
 
-	i = 0;
+	i = start;
 	while (i < ac)
 	{
 		if (ft_atoi(av[i]) > 2147483647 || ft_atoi(av[i]) < -2147483648)
@@ -84,17 +86,15 @@ int	check_int_min_max(int ac, char **av)
 	return (0);
 }
 
-int	error_check(int ac, char **av)
+int	error_check(int ac, char **av, int start)
 {
-	if (ac < 2)
-		return (1);
-	if (ac == 2 && check_string_arg(av[1]) == 1)
+	if (start == 1 && check_string_arg(av[1]) == 1)
 		return (-1);
-	if (number_check(ac, av) == 1 && ac > 2)
+	if (number_check(ac, av, start) == 1)
 		return (-1);
-	if (check_int_min_max(ac, av) == 1)
+	if (check_int_min_max(ac, av, start) == 1)
 		return (-1);
-	if (check_dup(av) == 1)
+	if (check_dup(av, start) == 1)
 		return (-1);
 	return (0);
 }
